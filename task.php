@@ -69,6 +69,7 @@ print("#####q7#####".PHP_EOL);
 $array = ["1", "2", "3", "4", "5"];
 
   # 以下に回答を記載
+  $array = array_map("intval", $array);
   # 以下は変更しないで下さい
 var_dump($array);
 
@@ -78,7 +79,8 @@ print("#####q8#####".PHP_EOL);
 $programming_languages = ["php","ruby","python","javascript"];
 
   # 以下に回答を記載
-
+$programming_languages = array_map("ucfirst",$programming_languages);
+$upper_case_programming_languages = array_map("strtoupper",$programming_languages);
   # 以下は変更しないで下さい
 print_r($programming_languages);
 echo PHP_EOL;
@@ -90,20 +92,47 @@ print("#####q9#####".PHP_EOL);
 $names = ["田中", "佐藤", "佐々木", "高橋"];
 
   # 以下に回答を記載
-
+$member_number = 0;
+foreach ($names as $name) {
+  $member_number ++;
+  $members[] = "会員No.".$member_number." ".$name;
+}
+print_r($members);
 echo PHP_EOL;
 
 print("#####q10#####".PHP_EOL);
 $foods = ["いか","たこ","うに","しゃけ","うにぎり","うに軍艦","うに丼"];
 
   # 以下に回答を記載
-
+foreach ($foods as $food) {
+  if (false!==strpos($food,"うに")) {
+    echo "好物です".PHP_EOL;
+  }else {
+    echo "まぁまぁ好きです".PHP_EOL;
+  }
+}
 echo PHP_EOL;
 
 print("#####q11#####".PHP_EOL);
 $sports = ["サッカー", "バスケ", "野球", ["フットサル", "野球"], "水泳", "ハンドボール", ["卓球", "サッカー", "ボルダリング"]];
 
   # 以下に回答を記載
+foreach ($sports as $sport) {
+  if (is_array($sport)) {
+    $new_sports = array_merge($new_sports,$sport);
+  }else {
+    $new_sports[] = $sport;
+  }
+}
+$new_sports = array_unique($new_sports);
+$new_sports = array_values($new_sports);
+
+echo "ユーザーの趣味一覧".PHP_EOL;
+$number = 0;
+foreach ($new_sports as $new_sport) {
+  $number ++;
+  echo "No".$number." ".$new_sport.PHP_EOL;
+}
 
 echo PHP_EOL;
 
@@ -111,7 +140,7 @@ print("#####q12#####".PHP_EOL);
 $data = [ "user" => [ "name" => "satou", "age" => 33 ] ];
 
   # 以下に回答を記載
-
+echo $data["user"]["name"];
 echo PHP_EOL;
 
 print("#####q13#####".PHP_EOL);
@@ -119,14 +148,17 @@ $user_data = [ "name" => "神里", "age" => 31, "address" => "埼玉"];
 $update_data = [ "age" => 32, "address" => "沖縄" ];
 
   # 以下に回答を記載
-
+$user_data["age"] = $update_data["age"];
+$user_data["address"] = $update_data["address"];
+print_r($user_data);
 echo PHP_EOL;
 
 print("#####q14#####".PHP_EOL);
 $data = [ "name" => "satou", "age" => 33, "address" => "saitama", "hobby" => "soccer", "email" => "hoge@fuga.com" ];
 
-  # 以下に回答を記載
-
+# 以下に回答を記載
+$data = array_values($data);
+print_r($data);
 echo PHP_EOL;
 
 print("#####q15#####".PHP_EOL);
@@ -134,7 +166,15 @@ $data1 = [ "name" => "saitou", "hobby" => "soccer", "age" => 33, "role" => "admi
 $data2 = [ "name" => "yamada", "hobby" => "baseball", "role" => "normal" ];
 
   # 以下に回答を記載
-
+function isAge($data){
+  if (array_key_exists("age",$data)) {
+    echo "OK".PHP_EOL;
+  }else {
+    echo "NG".PHP_EOL;
+  }
+}
+isAge($data1);
+isAge($data2);
 echo PHP_EOL;
 
 print("#####q16#####".PHP_EOL);
@@ -146,82 +186,84 @@ $users = [
 ];
 
   # 以下に回答を記載
-
+foreach ($users as $user) {
+  echo "私の名前は".$user["name"]."です。年齢は".$user["age"]."歳です".PHP_EOL;
+}
 echo PHP_EOL;
 
-print("#####q17#####".PHP_EOL);
-class User
-{
-
-  # コードを追加
-
-}
-
-$user1 = new User("神里",32,"男");
-$user2 = new User("あじー",32,"男");
-
-$user1->info();
-print("-------------".PHP_EOL);
-$user2->info();
-
-echo PHP_EOL;
-
-print("#####q18#####".PHP_EOL);
-
-  # コードを追加
-
-$man1 = new Man("あじー",32);
-$man2 = new Man("ゆたぼん",10);
-
-$man1->introduce();
-$man2->introduce();
-
-echo PHP_EOL;
-
-print("#####q19#####".PHP_EOL);
-class Item{
-  # 以下を修正して下さい
-
-  protected $name;
-
-  function __construct($book_name){
-    $this->name = $book_name;
-  }
-}
-  # 以下は変更しないで下さい
-
-$book = new Item("ゼロ秒思考");
-print($book->name.PHP_EOL);
-
-echo PHP_EOL;
-
-print("#####q20#####".PHP_EOL);
-class Human
-{
-
-  # コードを追加
-
-}
-
-class Zoo
-{
-
-  # コードを追加
-
-}
-
-$zoo = new Zoo("旭山動物園",[ "infant" => 0, "children" => 400, "adult" => 800, "senior" => 500]);
-
-$human1 = new Human("たま",3);
-$human2 = new Human("ゆたぼん",10);
-$human3 = new Human("あじー",32);
-$human4 = new Human("ぎん",108);
-
-$humans = [ $human1, $human2, $human3, $human4 ];
-
-foreach($humans as $human){
-  $zoo->info_entry_fee($human);
-}
-
-echo PHP_EOL;
+// print("#####q17#####".PHP_EOL);
+// class User
+// {
+//
+//   # コードを追加
+//
+// }
+//
+// $user1 = new User("神里",32,"男");
+// $user2 = new User("あじー",32,"男");
+//
+// $user1->info();
+// print("-------------".PHP_EOL);
+// $user2->info();
+//
+// echo PHP_EOL;
+//
+// print("#####q18#####".PHP_EOL);
+//
+//   # コードを追加
+//
+// $man1 = new Man("あじー",32);
+// $man2 = new Man("ゆたぼん",10);
+//
+// $man1->introduce();
+// $man2->introduce();
+//
+// echo PHP_EOL;
+//
+// print("#####q19#####".PHP_EOL);
+// class Item{
+//   # 以下を修正して下さい
+//
+//   protected $name;
+//
+//   function __construct($book_name){
+//     $this->name = $book_name;
+//   }
+// }
+//   # 以下は変更しないで下さい
+//
+// $book = new Item("ゼロ秒思考");
+// print($book->name.PHP_EOL);
+//
+// echo PHP_EOL;
+//
+// print("#####q20#####".PHP_EOL);
+// class Human
+// {
+//
+//   # コードを追加
+//
+// }
+//
+// class Zoo
+// {
+//
+//   # コードを追加
+//
+// }
+//
+// $zoo = new Zoo("旭山動物園",[ "infant" => 0, "children" => 400, "adult" => 800, "senior" => 500]);
+//
+// $human1 = new Human("たま",3);
+// $human2 = new Human("ゆたぼん",10);
+// $human3 = new Human("あじー",32);
+// $human4 = new Human("ぎん",108);
+//
+// $humans = [ $human1, $human2, $human3, $human4 ];
+//
+// foreach($humans as $human){
+//   $zoo->info_entry_fee($human);
+// }
+//
+// echo PHP_EOL;
  ?>
