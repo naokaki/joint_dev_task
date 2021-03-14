@@ -191,79 +191,148 @@ foreach ($users as $user) {
 }
 echo PHP_EOL;
 
-// print("#####q17#####".PHP_EOL);
-// class User
-// {
-//
-//   # コードを追加
-//
-// }
-//
-// $user1 = new User("神里",32,"男");
-// $user2 = new User("あじー",32,"男");
-//
-// $user1->info();
-// print("-------------".PHP_EOL);
-// $user2->info();
-//
-// echo PHP_EOL;
-//
-// print("#####q18#####".PHP_EOL);
-//
-//   # コードを追加
-//
-// $man1 = new Man("あじー",32);
-// $man2 = new Man("ゆたぼん",10);
-//
-// $man1->introduce();
-// $man2->introduce();
-//
-// echo PHP_EOL;
-//
-// print("#####q19#####".PHP_EOL);
-// class Item{
-//   # 以下を修正して下さい
-//
-//   protected $name;
-//
-//   function __construct($book_name){
-//     $this->name = $book_name;
-//   }
-// }
-//   # 以下は変更しないで下さい
-//
-// $book = new Item("ゼロ秒思考");
-// print($book->name.PHP_EOL);
-//
-// echo PHP_EOL;
-//
-// print("#####q20#####".PHP_EOL);
-// class Human
-// {
-//
-//   # コードを追加
-//
-// }
-//
-// class Zoo
-// {
-//
-//   # コードを追加
-//
-// }
-//
-// $zoo = new Zoo("旭山動物園",[ "infant" => 0, "children" => 400, "adult" => 800, "senior" => 500]);
-//
-// $human1 = new Human("たま",3);
-// $human2 = new Human("ゆたぼん",10);
-// $human3 = new Human("あじー",32);
-// $human4 = new Human("ぎん",108);
-//
-// $humans = [ $human1, $human2, $human3, $human4 ];
-//
-// foreach($humans as $human){
-//   $zoo->info_entry_fee($human);
-// }
-//
-// echo PHP_EOL;
+print("#####q17#####".PHP_EOL);
+class User
+{
+
+  # コードを追加
+  private $name;
+  private $age;
+  private $gender;
+
+    public function __construct($name,$age,$gender){
+      $this->name = $name;
+      $this->age = $age;
+      $this->gender = $gender;
+    }
+    public function info(){
+      echo $this->name.PHP_EOL;
+      echo $this->age.PHP_EOL;
+      echo $this->gender.PHP_EOL;
+    }
+}
+
+$user1 = new User("神里",32,"男");
+$user2 = new User("あじー",32,"男");
+
+$user1->info();
+print("-------------".PHP_EOL);
+$user2->info();
+
+echo PHP_EOL;
+
+print("#####q18#####".PHP_EOL);
+
+  # コードを追加
+class Man
+{
+  public $name;
+  public $age;
+  public function __construct($name,$age)
+  {
+    $this->name=$name;
+    $this->age=$age;
+  }
+  public function introduce(){
+    if($this->age > 20){
+      echo "こんにちは,　あじーと申します。宜しくお願いいたします。".PHP_EOL;
+    }else{
+      echo "はいさいまいど～,　ゆたぽんです！！！";
+    }
+  }
+}
+
+$man1 = new Man("あじー",32);
+$man2 = new Man("ゆたぼん",10);
+
+$man1->introduce();
+$man2->introduce();
+
+echo PHP_EOL;
+
+print("#####q19#####".PHP_EOL);
+class Item{
+  # 以下を修正して下さい
+
+  public $name;
+
+  function __construct($book_name){
+    $this->name = $book_name;
+  }
+}
+  # 以下は変更しないで下さい
+
+$book = new Item("ゼロ秒思考");
+print($book->name.PHP_EOL);
+
+echo PHP_EOL;
+
+print("#####q20#####".PHP_EOL);
+class Human
+{
+  # コードを追加
+  public $name;
+  public $age;
+  public function __construct($name,$age){
+    $this->name = $name;
+    $this->age = $age;
+  }
+}
+
+class Zoo
+{
+
+  # コードを追加
+public $zoo_name;
+public $fee;
+public function __construct($zoo_name,$fee){
+  $this->zoo_name = $zoo_name;
+  $this->fee = $fee;
+}
+public function info_entry_fee($human){
+  if (0<=$human->age && $human->age <= 5){
+    echo $human->name."さんの入場料金は".$this->fee["infant"]."円です。".PHP_EOL;
+  }else if(6<=$human->age &&$human->age <= 12){
+    echo $human->name."さんの入場料金は".$this->fee["children"]."円です。".PHP_EOL;
+  }else if(13<=$human->age &&$human->age <= 64){
+    echo $human->name."さんの入場料金は".$this->fee["adult"]."円です。".PHP_EOL;
+  }else if(65<=$human->age &&$human->age <= 120){
+    echo $human->name."さんの入場料金は".$this->fee["senior"]."円です。".PHP_EOL;
+  }
+}
+}
+
+$zoo = new Zoo("旭山動物園",[ "infant" => 0, "children" => 400, "adult" => 800, "senior" => 500]);
+
+$human1 = new Human("たま",3);
+$human2 = new Human("ゆたぼん",10);
+$human3 = new Human("あじー",32);
+$human4 = new Human("ぎん",108);
+
+$humans = [ $human1, $human2, $human3, $human4 ];
+
+foreach($humans as $human){
+  $zoo->info_entry_fee($human);
+}
+
+echo PHP_EOL;
+
+$numbers = range(1,30);
+foreach($numbers as $number){
+  if ($number % 3 == 0 && $number % 5 == 0){
+    echo "FizzBuzz".PHP_EOL;
+  }else if ($number % 3 == 0 && $number % 7 == 0){
+    echo "FizzHoge".PHP_EOL;
+  }else if($number % 5 == 0 && $number % 7 == 0){
+    echo "BuzzHoge".PHP_EOL;
+  }else if($number % 3 == 0){
+    echo "Fizz".PHP_EOL;
+  }else if($number % 5 == 0){
+    echo "Buzz".PHP_EOL;
+  }else if($number % 7 == 0){
+    echo "Hoge".PHP_EOL;
+  }else{
+    echo $number.PHP_EOL;
+  }
+}
  ?>
